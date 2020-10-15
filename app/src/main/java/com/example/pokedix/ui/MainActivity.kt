@@ -1,8 +1,7 @@
 package com.example.pokedix.ui
 
-import android.app.ActivityOptions
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.GridLayoutManager
 import com.example.pokedix.R
@@ -11,6 +10,7 @@ import com.example.pokedix.viewmodel.PokemonViewModel
 import kotlinx.android.synthetic.main.activity_main.*
 
 class MainActivity : AppCompatActivity() {
+
     private lateinit var viewModel: PokemonViewModel
     private lateinit var pokeAdapter: PokeRVAdapter
     override fun onCreate(savedInstanceState: Bundle?) {
