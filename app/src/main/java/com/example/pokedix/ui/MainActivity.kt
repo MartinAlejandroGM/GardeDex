@@ -1,26 +1,26 @@
 package com.example.pokedix.ui
 
+import android.content.Intent
+import android.content.Intent.getIntent
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.GridLayoutManager
 import com.example.pokedix.R
 import com.example.pokedix.adapters.PokeRVAdapter
-import com.example.pokedix.viewmodel.PokemonViewModel
+import com.example.pokedix.viewmodel.PokedixViewModel
 import kotlinx.android.synthetic.main.activity_main.*
 
 class MainActivity : AppCompatActivity() {
-
-    private lateinit var viewModel: PokemonViewModel
+    private lateinit var viewModel: PokedixViewModel
     private lateinit var pokeAdapter: PokeRVAdapter
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
-
-        viewModel = PokemonViewModel(application)
+        viewModel = PokedixViewModel(application)
         observePets()
         initRecyclerView()
-        viewModel.fetchPokemon()
+        viewModel.fetchGame()
     }
 
     private fun initRecyclerView() {
