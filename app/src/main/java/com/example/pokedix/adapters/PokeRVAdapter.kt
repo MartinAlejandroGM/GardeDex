@@ -5,7 +5,8 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.example.pokedix.R
-import com.example.pokedix.models.PokedixType
+import com.example.pokedix.extensions.nameFormat
+import com.example.pokedix.extensions.setImageGenerationsPicasso
 import com.example.pokedix.models.Results
 import kotlinx.android.synthetic.main.game_list_layout.view.*
 import kotlinx.android.synthetic.main.poke_list_layout.view.*
@@ -14,6 +15,7 @@ private const val GAME_LIST_VALUE = 0
 private const val OTHER_LIST_VALUE = 1
 class PokeRVAdapter : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
     private var pokeDixList = ArrayList<Results>()
+    var onPokeDixClickListener: ((Results) -> Unit)? = null
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
         return if (viewType == OTHER_LIST_VALUE) {
             PokeViewHolder(
@@ -66,7 +68,11 @@ class PokeRVAdapter : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
 
     inner class GenerationsViewHolder constructor(v: View) : RecyclerView.ViewHolder(v){
         fun generationsBind(results: Results) = itemView.run {
-            button_game.text = results.name
+            button_game.setImageGenerationsPicasso(results.name)
+            game_text.text = results.name.nameFormat()
+            setOnClickListener {
+                onPokeDixClickListener?.invoke(results)
+            }
         }
     }
 }
