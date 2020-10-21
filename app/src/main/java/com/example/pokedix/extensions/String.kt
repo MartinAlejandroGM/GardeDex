@@ -8,13 +8,11 @@ fun String.nameFormat(): String{
 
     val words = replacedString.split(" ").toMutableList()
 
-    var output = ""
+    var output = StringBuilder()
 
     for(word in words){
-        output += word.capitalize() +" "
+        output.append(word.capitalize(Locale.ROOT).plus(" "))
     }
 
-    output = output.trim()
-
-    return output
+    return output.toString()
 }

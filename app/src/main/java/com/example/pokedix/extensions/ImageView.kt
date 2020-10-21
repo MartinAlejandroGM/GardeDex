@@ -67,11 +67,11 @@ fun ImageView.setImageGenerationsPicasso(gameName: String) {
         "sword-shield" -> {
             imageUrl  = "https://iili.io/3040Ab.png"
         }
+        else -> {
+            imageUrl = "https://iili.io/304jl1.jpg"
+        }
     }
 
-    if (imageUrl.isEmpty()){
-        imageUrl = "https://iili.io/304jl1.jpg"
-    }
     Picasso.get()
         .load(imageUrl)
         .error(R.drawable.ic_launcher_background)
