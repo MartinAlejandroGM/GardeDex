@@ -3,4 +3,7 @@
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="floating_button_text">button</string>
+    <string name="pokemon_str">Pokémon</string>
+    <string name="items_str">Items</string>
+    <string name="machines_str">Machines</string>
 </resources>
