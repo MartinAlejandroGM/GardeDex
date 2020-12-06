@@ -1,6 +1,7 @@
 package com.example.pokedix.network.webservice
 
-import com.example.pokedix.models.GameListResponse
+import com.example.pokedix.models.GameResponse
+import com.example.pokedix.models.GamesListResponse
 import com.example.pokedix.models.PokemonListResponse
 import com.example.pokedix.network.Api
 import com.example.pokedix.network.api.PokeApi
@@ -12,8 +13,16 @@ class PokeWS {
         return service.getPokemonList()
     }
 
-    suspend fun fetchGames(): GameListResponse {
+    suspend fun fetchGames(): GamesListResponse {
         return service.getGamesList()
+    }
+
+    suspend fun fetchPokedex(region: String?): PokemonListResponse {
+        return service.getPokedex(region)
+    }
+    
+    suspend fun fetchPokedexesByGroupVersion(id: Int?): GameResponse {
+        return service.getPokedexesByGroupVersion(id)
     }
 
 }

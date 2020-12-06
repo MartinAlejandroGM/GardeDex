@@ -6,7 +6,8 @@ import kotlinx.android.parcel.Parcelize
 @Parcelize
 data class GamesList (
     var game: GameTypes,
-    var gameListUrls: GameImageUrls
+    var gameListUrls: GameImageUrls,
+    var url: String
 ): Parcelable
 
 @Parcelize

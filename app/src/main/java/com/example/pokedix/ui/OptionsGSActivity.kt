@@ -4,11 +4,9 @@ import android.content.Context
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.widget.Toast
 import com.example.pokedix.R
-import com.example.pokedix.extensions.setImageGenerationsPicasso
-import com.example.pokedix.models.GameListResponse
 import com.example.pokedix.models.GamesList
-import com.example.pokedix.models.Results
 import com.squareup.picasso.Picasso
 import kotlinx.android.synthetic.main.activity_options_g_s.*
 
@@ -38,13 +36,19 @@ class OptionsGSActivity : AppCompatActivity() {
                 .error(R.drawable.ic_launcher_background)
                 .into(pokemon)
             Picasso.get()
-                .load(game.gameListUrls.itemsImage)
+                .load(it.gameListUrls.itemsImage)
                 .error(R.drawable.ic_launcher_background)
                 .into(items)
             Picasso.get()
-                .load(game.gameListUrls.machinesImage)
+                .load(it.gameListUrls.machinesImage)
                 .error(R.drawable.ic_launcher_background)
                 .into(machines)
+        }
+
+        pokemon.setOnClickListener {
+            val gameIntent = DescriptionListsActivity.getIntent(this, game as GamesList)
+            startActivity(gameIntent)
+            Toast.makeText(this, game.game.name, Toast.LENGTH_SHORT).show()
         }
     }
 

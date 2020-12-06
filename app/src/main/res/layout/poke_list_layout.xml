@@ -2,16 +2,36 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:orientation="vertical">
 
-    <TextView
-        android:id="@+id/poke_name"
+    <androidx.cardview.widget.CardView
+        android:layout_margin="8dp"
+        app:cardCornerRadius="40dp"
+        app:cardElevation="4dp"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content" />
+        android:layout_height="80dp">
 
-    <TextView
-        android:id="@+id/poke_type"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content" />
+        <FrameLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
 
+            <ImageView
+                android:id="@+id/pokemon"
+                android:layout_width="match_parent"
+                android:layout_height="120dp"
+                android:background="#AA000000"
+                android:scaleType="centerCrop" />
+
+            <TextView
+                android:id="@+id/pokemon_name"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="bottom"
+                android:background="#AA000000"
+                android:padding="4dip"
+                android:text="@string/pokemon_str"
+                android:textColor="#ffffffff" />
+        </FrameLayout>
+    </androidx.cardview.widget.CardView>
 </LinearLayout>

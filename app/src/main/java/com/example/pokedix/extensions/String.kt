@@ -22,6 +22,14 @@ fun String.nameFormat(): String{
     return output.toString()
 }
 
+fun String.toFormatURL(): String{
+    var newString = this.replace("https://pokeapi.co/api/v2/version-group/","")
+
+    newString = newString.replace("/","")
+
+    return newString
+}
+
 fun String.toFormatGameTypesEnum(): String{
     return this.toUpperCase(Locale.ROOT).replace('-', '_')
 }
