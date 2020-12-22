@@ -1,8 +1,7 @@
 package com.example.pokedix.repository
 
-import com.example.pokedix.models.PokemonList
-import com.example.pokedix.models.Results
+import com.example.pokedix.models.PokedexList
 
 interface PokedixRepository {
-    suspend fun getPokedex(gameUrl: String): List<PokemonList>
+    suspend fun getPokedex(gameUrl: String): List<PokedexList>
 }

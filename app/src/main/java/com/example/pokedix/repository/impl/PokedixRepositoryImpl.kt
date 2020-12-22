@@ -7,16 +7,16 @@ import com.example.pokedix.network.webservice.PokeWS
 import com.example.pokedix.repository.PokedixRepository
 
 class PokedixRepositoryImpl : PokedixRepository {
-    override suspend fun getPokedex(gameUrl: String): List<PokemonList> {
+    override suspend fun getPokedex(gameUrl: String): List<PokedexList> {
         val pokeWs = PokeWS()
-        val gameResponse: GameResponse = pokeWs.fetchPokedexesByGroupVersion(gameUrl.toFormatURL().toInt())
-        val pokemonResponseList: PokemonListResponse = pokeWs.fetchPokedex(gameResponse.pokedexes.first().name)
-        val pokemonList: ArrayList<PokemonList> = ArrayList()
+        val gameResponse: GameResponse = pokeWs.fetchPokedexesByGroupVersion(gameUrl.toFormatURL())
+        val pokedexResponseList: PokedexListResponse = pokeWs.fetchPokedex(gameResponse.pokedexes.first().name)
+        val pokedexList: ArrayList<PokedexList> = ArrayList()
 
-        pokemonResponseList.let {
-            pokemonList.addAll(it.toPokemonList())
+        pokedexResponseList.let {
+            pokedexList.addAll(it.toPokemonList())
         }
 
-        return pokemonList
+        return pokedexList
     }
 }

@@ -6,16 +6,16 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.Toast
 import androidx.lifecycle.Observer
-import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.GridLayoutManager
 import com.example.pokedix.R
 import com.example.pokedix.adapters.PokemonListsRVAdapter
 import com.example.pokedix.models.GamesList
-import com.example.pokedix.viewmodel.PokemonViewModel
+import com.example.pokedix.viewmodel.PokedexViewModel
 import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.android.synthetic.main.activity_options_g_s.*
 
 class DescriptionListsActivity : AppCompatActivity() {
-    private lateinit var viewModel: PokemonViewModel
+    private lateinit var viewModel: PokedexViewModel
     private lateinit var pokeAdapter: PokemonListsRVAdapter
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -31,7 +31,7 @@ class DescriptionListsActivity : AppCompatActivity() {
 
         val pokedex: GamesList? = intent.getParcelableExtra("pokedex")
 
-        viewModel = PokemonViewModel(application)
+        viewModel = PokedexViewModel(application)
         observeGames()
         initRecyclerView()
         pokedex?.let {
@@ -41,17 +41,19 @@ class DescriptionListsActivity : AppCompatActivity() {
 
     private fun initRecyclerView() {
         poke_list_recycler.apply {
-            layoutManager = LinearLayoutManager(this@DescriptionListsActivity)
+            layoutManager = GridLayoutManager(this@DescriptionListsActivity,4)
             pokeAdapter = PokemonListsRVAdapter()
             adapter = pokeAdapter
             pokeAdapter.onListClickListener = {
+                val pokemonInstance = PokemonDescriptionDialog.newInstance(it)
+                pokemonInstance.show(supportFragmentManager, "PokemonFragment")
                 Toast.makeText(this@DescriptionListsActivity, it.name, Toast.LENGTH_SHORT).show()
             }
         }
     }
 
     private fun observeGames() {
-        viewModel.pokemonLiveData.observe(this, Observer {
+        viewModel.pokedexLiveData.observe(this, Observer {
             pokeAdapter.submitList(it)
         })
     }

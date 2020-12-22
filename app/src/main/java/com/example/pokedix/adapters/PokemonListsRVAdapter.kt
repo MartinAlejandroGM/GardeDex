@@ -5,16 +5,13 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.example.pokedix.R
-import com.example.pokedix.extensions.nameFormat
-import com.example.pokedix.models.GamesList
-import com.example.pokedix.models.PokemonList
+import com.example.pokedix.models.PokedexList
 import com.squareup.picasso.Picasso
-import kotlinx.android.synthetic.main.game_list_layout.view.*
 import kotlinx.android.synthetic.main.poke_list_layout.view.*
 
 class PokemonListsRVAdapter : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
-    private var pokeList = ArrayList<PokemonList>()
-    var onListClickListener: ((PokemonList) -> Unit)? = null
+    private var pokeList = ArrayList<PokedexList>()
+    var onListClickListener: ((PokedexList) -> Unit)? = null
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
         return PokemonListsViewHolder(
             LayoutInflater.from(parent.context)
@@ -22,7 +19,7 @@ class PokemonListsRVAdapter : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
         )
     }
 
-    fun submitList(pokemonList: List<PokemonList>, shouldClear: Boolean = false) {
+    fun submitList(pokemonList: List<PokedexList>, shouldClear: Boolean = false) {
         if (shouldClear) {
             pokeList.clear()
         }
@@ -41,9 +38,15 @@ class PokemonListsRVAdapter : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
     override fun getItemCount() = pokeList.size
 
     inner class PokemonListsViewHolder constructor(v: View) : RecyclerView.ViewHolder(v){
-        fun pokemonListBind(pokemon: PokemonList) = itemView.run {
-            pokemon_name.text = pokemon.name
-            //TODO: Picasso image of pokemon.
+        fun pokemonListBind(pokemon: PokedexList) = itemView.run {
+            Picasso.get()
+                .load("https://iili.io/KISExa.png")
+                .error(R.drawable.ic_launcher_background)
+                .into(pokemon_img)
+            Picasso.get()
+                .load("https://iili.io/KIStWb.png")
+                .error(R.drawable.ic_launcher_background)
+                .into(poke_sprite)
             setOnClickListener {
                 onListClickListener?.invoke(pokemon)
             }

@@ -1,15 +1,13 @@
 package com.example.pokedix.network.webservice
 
-import com.example.pokedix.models.GameResponse
-import com.example.pokedix.models.GamesListResponse
-import com.example.pokedix.models.PokemonListResponse
+import com.example.pokedix.models.*
 import com.example.pokedix.network.Api
 import com.example.pokedix.network.api.PokeApi
 
 class PokeWS {
     private val service = Api.createApi(PokeApi::class.java)
 
-    suspend fun fetchPokemons(): PokemonListResponse {
+    suspend fun fetchPokemons(): PokedexListResponse {
         return service.getPokemonList()
     }
 
@@ -17,12 +15,16 @@ class PokeWS {
         return service.getGamesList()
     }
 
-    suspend fun fetchPokedex(region: String?): PokemonListResponse {
+    suspend fun fetchPokedex(region: String?): PokedexListResponse {
         return service.getPokedex(region)
     }
     
-    suspend fun fetchPokedexesByGroupVersion(id: Int?): GameResponse {
-        return service.getPokedexesByGroupVersion(id)
+    suspend fun fetchPokedexesByGroupVersion(url: String?): GameResponse {
+        return service.getPokedexesByGroupVersion(url)
+    }
+
+    suspend fun fetchPokemon(pokemonName: String?): PokemonDetailsResponse {
+        return service.getPokemon(pokemonName)
     }
 
 }

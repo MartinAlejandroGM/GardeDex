@@ -1,10 +1,6 @@
 package com.example.pokedix.extensions
 
-import android.widget.ImageView
-import com.example.pokedix.R
 import com.example.pokedix.models.GameImageUrls
-import com.example.pokedix.models.GameTypes
-import com.squareup.picasso.Picasso
 import java.util.*
 
 fun String.nameFormat(): String{
@@ -22,16 +18,24 @@ fun String.nameFormat(): String{
     return output.toString()
 }
 
+/*
+    Description:
+    Get the valid url to get the new json, replace the common string to only get the rest of the url
+    Common URL: https://pokeapi.co/api/
+    Example:
+    Url: https://pokeapi.co/api/v2/pokedexes/2/
+    we need only the string after the ..api/ then we replace all the text before the v2 doing that we get only v2/pokedexes/2/ and return it.
+ */
 fun String.toFormatURL(): String{
-    var newString = this.replace("https://pokeapi.co/api/v2/version-group/","")
-
-    newString = newString.replace("/","")
-
-    return newString
+    return replace("https://pokeapi.co/api/","")
 }
 
 fun String.toFormatGameTypesEnum(): String{
     return this.toUpperCase(Locale.ROOT).replace('-', '_')
+}
+
+fun String.getUrlsByPokemonName(): String {
+    return ""
 }
 
 fun String.getUrlsByGameName(): GameImageUrls {

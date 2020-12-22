@@ -1,7 +1,7 @@
 package com.example.pokedix.models
 
 
-data class PokemonListResponse (
+data class PokedexListResponse (
     var name: String,
     var pokemon_entries: List<PokemonEntries>,
     var region: Region
