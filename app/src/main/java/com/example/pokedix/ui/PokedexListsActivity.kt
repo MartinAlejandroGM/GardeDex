@@ -8,15 +8,15 @@ import android.widget.Toast
 import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.GridLayoutManager
 import com.example.pokedix.R
-import com.example.pokedix.adapters.PokemonListsRVAdapter
-import com.example.pokedix.models.GamesList
+import com.example.pokedix.adapters.PokedexAdapter
+import com.example.pokedix.models.GameList
 import com.example.pokedix.viewmodel.PokedexViewModel
 import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.android.synthetic.main.activity_options_g_s.*
 
-class DescriptionListsActivity : AppCompatActivity() {
+class PokedexListsActivity : AppCompatActivity() {
     private lateinit var viewModel: PokedexViewModel
-    private lateinit var pokeAdapter: PokemonListsRVAdapter
+    private lateinit var pokeAdapter: PokedexAdapter
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_description_lists)
@@ -29,10 +29,10 @@ class DescriptionListsActivity : AppCompatActivity() {
             onBackPressed()
         }
 
-        val pokedex: GamesList? = intent.getParcelableExtra("pokedex")
+        val pokedex: GameList? = intent.getParcelableExtra(ARG_POKEDEX_KEY)
 
         viewModel = PokedexViewModel(application)
-        observeGames()
+        observePokedex()
         initRecyclerView()
         pokedex?.let {
             viewModel.fetchPokedex(it.url)
@@ -41,28 +41,29 @@ class DescriptionListsActivity : AppCompatActivity() {
 
     private fun initRecyclerView() {
         poke_list_recycler.apply {
-            layoutManager = GridLayoutManager(this@DescriptionListsActivity,4)
-            pokeAdapter = PokemonListsRVAdapter()
+            layoutManager = GridLayoutManager(this@PokedexListsActivity,4)
+            pokeAdapter = PokedexAdapter()
             adapter = pokeAdapter
             pokeAdapter.onListClickListener = {
                 val pokemonInstance = PokemonDescriptionDialog.newInstance(it)
                 pokemonInstance.show(supportFragmentManager, "PokemonFragment")
-                Toast.makeText(this@DescriptionListsActivity, it.name, Toast.LENGTH_SHORT).show()
+                Toast.makeText(this@PokedexListsActivity, it.pokemonName, Toast.LENGTH_SHORT).show()
             }
         }
     }
 
-    private fun observeGames() {
+    private fun observePokedex() {
         viewModel.pokedexLiveData.observe(this, Observer {
             pokeAdapter.submitList(it)
         })
     }
 
     companion object{
-        private const val ARG_POKEDEX_KEY = "pokedex"
+        private const val NAMESPACE = "com.example.pokedix.ui"
+        private const val ARG_POKEDEX_KEY = "${NAMESPACE}.pokedex"
 
-        fun getIntent(context: Context, pokedex: GamesList): Intent {
-            return Intent(context, DescriptionListsActivity::class.java).apply {
+        fun getIntent(context: Context, pokedex: GameList): Intent {
+            return Intent(context, PokedexListsActivity::class.java).apply {
                 putExtra(ARG_POKEDEX_KEY, pokedex)
             }
 

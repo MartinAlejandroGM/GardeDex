@@ -1,9 +1,12 @@
 package com.example.pokedix.models
 
+import com.google.gson.annotations.SerializedName
+
 
 data class PokedexListResponse (
     var name: String,
-    var pokemon_entries: List<PokemonEntries>,
+    @SerializedName("pokemon_entries")
+    var pokemonEntries: List<PokemonEntries>,
     var region: Region
 )
 
@@ -13,8 +16,10 @@ data class Region(
 )
 
 data class PokemonEntries(
-    var entry_number: Int,
-    var pokemon_species: PokemonSpecies
+    @SerializedName("entry_number")
+    var entryNumber: Int,
+    @SerializedName("pokemon_species")
+    var pokemonSpecies: PokemonSpecies
 )
 
 data class PokemonSpecies(

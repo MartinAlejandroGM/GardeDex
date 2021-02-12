@@ -53,7 +53,7 @@ enum class PokemonType(){
     NO
 }
 
-enum class PokedexRegions(val regId: Int){
+enum class PokedexRegions(regId: Int){
     NATIONAL(1),
     KANTO(2),
     ORIGINAL_JOHTO(3),
@@ -73,4 +73,16 @@ enum class PokedexRegions(val regId: Int){
     ORIGINAL_ULAULA(19),
     ORIGINAL_PONI(20),
     UPDATED_ALOLA(21)
+}
+
+enum class Regions(region: String){
+    NATIONAL("national"),
+    KANTO("kanto"),
+    JOHTO("johto"),
+    HOENN("hoenn"),
+    SINNOH("sinnoh"),
+    UNOVA("unova"),
+    KALOS("kalos"),
+    ALOLA("alola"),
+    GALAR("galar")
 }

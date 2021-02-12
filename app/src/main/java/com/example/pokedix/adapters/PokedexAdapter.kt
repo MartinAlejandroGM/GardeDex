@@ -9,11 +9,11 @@ import com.example.pokedix.models.PokedexList
 import com.squareup.picasso.Picasso
 import kotlinx.android.synthetic.main.poke_list_layout.view.*
 
-class PokemonListsRVAdapter : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
+class PokedexAdapter : RecyclerView.Adapter<PokedexAdapter.PokedexViewHolder>() {
     private var pokeList = ArrayList<PokedexList>()
     var onListClickListener: ((PokedexList) -> Unit)? = null
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
-        return PokemonListsViewHolder(
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): PokedexViewHolder {
+        return PokedexViewHolder(
             LayoutInflater.from(parent.context)
                 .inflate(R.layout.poke_list_layout, parent, false)
         )
@@ -27,24 +27,20 @@ class PokemonListsRVAdapter : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
         notifyDataSetChanged()
     }
 
-    override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {
-        when (holder) {
-            is PokemonListsRVAdapter.PokemonListsViewHolder -> {
-                holder.pokemonListBind(pokeList[position])
-            }
-        }
+    override fun onBindViewHolder(holder: PokedexViewHolder, position: Int) {
+        holder.pokemonListBind(pokeList[position])
     }
 
     override fun getItemCount() = pokeList.size
 
-    inner class PokemonListsViewHolder constructor(v: View) : RecyclerView.ViewHolder(v){
+    inner class PokedexViewHolder constructor(v: View) : RecyclerView.ViewHolder(v){
         fun pokemonListBind(pokemon: PokedexList) = itemView.run {
             Picasso.get()
                 .load("https://iili.io/KISExa.png")
                 .error(R.drawable.ic_launcher_background)
                 .into(pokemon_img)
             Picasso.get()
-                .load("https://iili.io/KIStWb.png")
+                .load(pokemon.imagesUrls.pokeFront)
                 .error(R.drawable.ic_launcher_background)
                 .into(poke_sprite)
             setOnClickListener {

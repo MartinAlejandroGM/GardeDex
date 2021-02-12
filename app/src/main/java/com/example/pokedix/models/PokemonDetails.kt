@@ -4,9 +4,16 @@ data class PokemonDetails(
     val Id: Int,
     val pokeName: String,
     val pokeType1: PokemonType,
-    val pokeType2: PokemonType?,
+    val pokeType2: PokemonType,
     val pokeDescription: String,
-    val baseStats: BaseStats
+    val baseStats: BaseStats,
+    val pokeGenera: String,
+    val pokemonSprite: PokemonSprites
+)
+
+data class PokemonSprites(
+    val frontSprite: String,
+    val backSprite: String
 )
 
 data class BaseStats(

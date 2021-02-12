@@ -6,12 +6,15 @@ import kotlinx.android.parcel.Parcelize
 @Parcelize
 data class PokedexList(
     val id: Int,
-    val name: String,
-    val imagesUrls: PokemonImageUrls
+    val pokemonName: String,
+    val imagesUrls: PokemonImageUrls,
+    val region: Regions,
+    var gameVersion: String,
+    var generationSelected: String,
+    var gameNameGroup: String
 ): Parcelable
 
 @Parcelize
 data class PokemonImageUrls(
-    var pokeFront: String,
-    var pokeBack: String
+    var pokeFront: String
 ): Parcelable

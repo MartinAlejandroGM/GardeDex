@@ -1,14 +1,13 @@
 package com.example.pokedix.extensions
 
-import com.example.pokedix.models.GamesListResponse
+import com.example.pokedix.models.GameListResponse
 import com.example.pokedix.models.GameTypes
-import com.example.pokedix.models.GamesList
-import com.example.pokedix.models.PokedexRegions
+import com.example.pokedix.models.GameList
 
-fun GamesListResponse.toGamesList(): List<GamesList> {
+fun GameListResponse.toGamesList(): List<GameList> {
     return results.map { result ->
-        GamesList(
-            GameTypes.valueOf(result.name.toFormatGameTypesEnum()),
+        GameList(
+            GameTypes.valueOf(result.name.toValidFormatTypesEnum()),
             result.name.getUrlsByGameName(),
             result.url
         )

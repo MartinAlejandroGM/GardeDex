@@ -1,13 +1,22 @@
 package com.example.pokedix.extensions
-
 import com.example.pokedix.models.*
 
-fun PokedexListResponse.toPokemonList(): List<PokedexList> {
-    return pokemon_entries.map { pokemon ->
+fun PokedexListResponse.toPokemonList(game: GameResponse): List<PokedexList> {
+    return pokemonEntries.map { pokemon ->
         PokedexList(
-            pokemon.entry_number,
-            pokemon.pokemon_species.name,
-            PokemonImageUrls("URL1","URL2")
+            pokemon.entryNumber,
+            pokemon.pokemonSpecies.name,
+            PokemonImageUrls(
+                pokemon.pokemonSpecies.name.getPokemonURLSpriteByNameRegion(
+                    Regions.valueOf(
+                        region.name.toValidFormatTypesEnum()
+                    )
+                )
+            ),
+            Regions.valueOf(region.name.toValidFormatTypesEnum()),
+            game.versions[0].name,
+            game.generation.name,
+            game.name
         )
     }
 }
