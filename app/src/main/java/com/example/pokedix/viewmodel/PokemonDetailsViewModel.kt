@@ -9,18 +9,20 @@ import com.example.pokedix.models.PokedexList
 import com.example.pokedix.models.PokemonDetails
 import com.example.pokedix.repository.impl.PokedixRepositoryImpl
 import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.launch
+import com.example.pokedix.extensions.launch
+import com.example.pokedix.extensions.Result
 
 class PokemonDetailsViewModel(application: Application) : AndroidViewModel(application) {
     private val pokemonRepository = PokedixRepositoryImpl()
-    private val _pokemonLiveData: MutableLiveData<PokemonDetails> = MutableLiveData()
+    private val _pokemonLiveData: MutableLiveData<Result<PokemonDetails>> = MutableLiveData()
 
-    val pokemonLiveData: LiveData<PokemonDetails>
+    val pokemonLiveData: LiveData<Result<PokemonDetails>>
         get() = _pokemonLiveData
 
     fun fetchPokemon(pokedexSelected: PokedexList){
-        viewModelScope.launch(Dispatchers.IO) {
-            _pokemonLiveData.postValue(pokemonRepository.getPokemon(pokedexSelected))
+        viewModelScope.launch(_pokemonLiveData, Dispatchers.IO) {
+            val result = pokemonRepository.getPokemon(pokedexSelected)
+            result
         }
     }
 }

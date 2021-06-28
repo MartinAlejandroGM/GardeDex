@@ -5,7 +5,7 @@ import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.Toast
-import androidx.lifecycle.Observer
+import com.example.pokedix.extensions.observe
 import androidx.recyclerview.widget.GridLayoutManager
 import com.example.pokedix.R
 import com.example.pokedix.adapters.PokedexAdapter
@@ -53,8 +53,9 @@ class PokedexListsActivity : AppCompatActivity() {
     }
 
     private fun observePokedex() {
-        viewModel.pokedexLiveData.observe(this, Observer {
+        viewModel.pokedexLiveData.observe(this, {
             pokeAdapter.submitList(it)
+        }, {
         })
     }
 
