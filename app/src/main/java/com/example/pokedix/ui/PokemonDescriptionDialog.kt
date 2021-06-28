@@ -6,12 +6,10 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.DialogFragment
-import androidx.lifecycle.Observer
+import com.example.pokedix.extensions.observe
 import com.example.pokedix.R
 import com.example.pokedix.adapters.PokemonDetailsAdapter
 import com.example.pokedix.models.PokedexList
-import com.example.pokedix.models.PokemonDetails
-import com.example.pokedix.models.PokemonDetailsResponse
 import com.example.pokedix.viewmodel.PokemonDetailsViewModel
 import com.google.android.material.tabs.TabLayoutMediator
 import com.squareup.picasso.Picasso
@@ -60,7 +58,7 @@ class PokemonDescriptionDialog : DialogFragment() {
     }
 
     private fun observePokemon() {
-        viewModel.pokemonLiveData.observe(this, Observer {
+        viewModel.pokemonLiveData.observe(this, {
             type1.text = it.pokeType1.name
             type2.text = it.pokeType2.name
             pokeGenus.text = it.pokeGenera
@@ -71,6 +69,7 @@ class PokemonDescriptionDialog : DialogFragment() {
             initViewPager()
             pokemonDetailsAdapter.submitPokemonDetails(it)
             attachPager()
+        }, {
         })
     }
 

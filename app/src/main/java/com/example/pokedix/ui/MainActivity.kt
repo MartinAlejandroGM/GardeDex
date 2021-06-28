@@ -1,9 +1,8 @@
 package com.example.pokedix.ui
 
 import android.os.Bundle
-import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
-import androidx.lifecycle.Observer
+import com.example.pokedix.extensions.observe
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.pokedix.R
 import com.example.pokedix.adapters.GameAdapter
@@ -33,14 +32,14 @@ class MainActivity : AppCompatActivity() {
             pokeAdapter.onPokeDixClickListener = {
                 val gameIntent = OptionsGSActivity.getIntent(this@MainActivity, it)
                 startActivity(gameIntent)
-                Toast.makeText(this@MainActivity, it.game.name, Toast.LENGTH_SHORT).show()
             }
         }
     }
 
     private fun observeGames() {
-        viewModel.gameLiveData.observe(this, Observer {
-            pokeAdapter.submitList(it)
+        viewModel.gameLiveData.observe(this, { games ->
+            pokeAdapter.submitList(games)
+        }, {
         })
     }
 }
