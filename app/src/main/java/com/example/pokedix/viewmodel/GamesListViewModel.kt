@@ -5,19 +5,16 @@ import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
-import com.example.pokedix.models.GamesList
-import com.example.pokedix.models.Results
-import com.example.pokedix.repository.GameRepository
-import com.example.pokedix.repository.impl.GameRepositoryImpl
+import com.example.pokedix.models.GameList
 import com.example.pokedix.repository.impl.PokedixRepositoryImpl
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 
 class GamesListViewModel(application: Application) : AndroidViewModel(application) {
-    private val gameRepository = GameRepositoryImpl()
-    private val _gameLiveData: MutableLiveData<List<GamesList>> = MutableLiveData()
+    private val gameRepository = PokedixRepositoryImpl()
+    private val _gameLiveData: MutableLiveData<List<GameList>> = MutableLiveData()
 
-    val gameLiveData: LiveData<List<GamesList>>
+    val gameLiveData: LiveData<List<GameList>>
         get() = _gameLiveData
 
     fun fetchGame(){

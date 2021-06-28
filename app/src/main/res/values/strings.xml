@@ -6,4 +6,14 @@
     <string name="pokemon_str">Pokémon</string>
     <string name="items_str">Items</string>
     <string name="machines_str">Machines</string>
+    <string name="description">Description</string>
+    <string name="area">Area</string>
+    <string name="cry">Cry</string>
+    <string name="stats">Stats</string>
+    <string name="hp">HP</string>
+    <string name="atk">Atk</string>
+    <string name="def">Def</string>
+    <string name="sa">SA</string>
+    <string name="sd">SD</string>
+    <string name="sp">Sp</string>
 </resources>
