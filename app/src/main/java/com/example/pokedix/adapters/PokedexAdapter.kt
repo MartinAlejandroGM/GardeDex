@@ -5,9 +5,9 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.example.pokedix.R
+import com.example.pokedix.databinding.PokeListLayoutBinding
 import com.example.pokedix.models.PokedexList
 import com.squareup.picasso.Picasso
-import kotlinx.android.synthetic.main.poke_list_layout.view.*
 
 class PokedexAdapter : RecyclerView.Adapter<PokedexAdapter.PokedexViewHolder>() {
     private var pokeList = ArrayList<PokedexList>()
@@ -34,16 +34,17 @@ class PokedexAdapter : RecyclerView.Adapter<PokedexAdapter.PokedexViewHolder>() 
     override fun getItemCount() = pokeList.size
 
     inner class PokedexViewHolder constructor(v: View) : RecyclerView.ViewHolder(v){
-        fun pokemonListBind(pokemon: PokedexList) = itemView.run {
+        private val binding = PokeListLayoutBinding.bind(v)
+        fun pokemonListBind(pokemon: PokedexList) = with(binding) {
             Picasso.get()
                 .load("https://iili.io/KISExa.png")
                 .error(R.drawable.ic_launcher_background)
-                .into(pokemon_img)
+                .into(binding.pokemonImg)
             Picasso.get()
                 .load(pokemon.imagesUrls.pokeFront)
                 .error(R.drawable.ic_launcher_background)
-                .into(poke_sprite)
-            setOnClickListener {
+                .into(binding.pokeSprite)
+            binding.root.setOnClickListener {
                 onListClickListener?.invoke(pokemon)
             }
         }
