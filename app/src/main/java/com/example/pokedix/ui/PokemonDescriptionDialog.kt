@@ -61,7 +61,7 @@ class PokemonDescriptionDialog : DialogFragment() {
 
     private fun observePokemon() {
         viewModel.pokemonLiveData.observe(this, {
-            binding.type2.text = it.pokeType1.name
+            binding.type1.text = it.pokeType1.name
             binding.type2.text = it.pokeType2.name
             binding.pokeGenus.text = it.pokeGenera
             Picasso.get()
