@@ -9,21 +9,23 @@ import androidx.fragment.app.DialogFragment
 import com.example.pokedix.extensions.observe
 import com.example.pokedix.R
 import com.example.pokedix.adapters.PokemonDetailsAdapter
+import com.example.pokedix.databinding.PokemonDetailsLayoutBinding
 import com.example.pokedix.models.PokedexList
 import com.example.pokedix.viewmodel.PokemonDetailsViewModel
 import com.google.android.material.tabs.TabLayoutMediator
 import com.squareup.picasso.Picasso
-import kotlinx.android.synthetic.main.pokemon_details_layout.*
 
 class PokemonDescriptionDialog : DialogFragment() {
     private lateinit var pokemonDetailsAdapter: PokemonDetailsAdapter
     private lateinit var viewModel: PokemonDetailsViewModel
+    private lateinit var binding: PokemonDetailsLayoutBinding
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        return inflater.inflate(R.layout.pokemon_details_layout, container, false)
+        binding = PokemonDetailsLayoutBinding.inflate(LayoutInflater.from(context), container, false)
+        return binding.root
     }
 
     override fun onStart() {
@@ -36,13 +38,13 @@ class PokemonDescriptionDialog : DialogFragment() {
         val pokemon: PokedexList? = arguments?.getParcelable(ARG_POKEMON_KEY)
         observePokemon()
         pokemon?.let {
-            pokemon_name.text = it.pokemonName
+            binding.pokemonName.text = it.pokemonName
             viewModel.fetchPokemon(it)
         }
     }
 
     private fun attachPager() {
-        TabLayoutMediator(tab_layout, pager) { tab, position ->
+        TabLayoutMediator(binding.tabLayout, binding.pager) { tab, position ->
             when (position) {
                 0 -> {
                     tab.setText(R.string.description)
@@ -59,13 +61,13 @@ class PokemonDescriptionDialog : DialogFragment() {
 
     private fun observePokemon() {
         viewModel.pokemonLiveData.observe(this, {
-            type1.text = it.pokeType1.name
-            type2.text = it.pokeType2.name
-            pokeGenus.text = it.pokeGenera
+            binding.type1.text = it.pokeType1.name
+            binding.type2.text = it.pokeType2.name
+            binding.pokeGenus.text = it.pokeGenera
             Picasso.get()
                 .load(it.pokemonSprite.frontSprite)
                 .error(R.drawable.ic_launcher_background)
-                .into(pokeImage)
+                .into(binding.pokeImage)
             initViewPager()
             pokemonDetailsAdapter.submitPokemonDetails(it)
             attachPager()
@@ -74,7 +76,7 @@ class PokemonDescriptionDialog : DialogFragment() {
     }
 
     private fun initViewPager() {
-        pager.apply {
+        binding.pager.apply {
             pokemonDetailsAdapter = PokemonDetailsAdapter()
             adapter = pokemonDetailsAdapter
         }

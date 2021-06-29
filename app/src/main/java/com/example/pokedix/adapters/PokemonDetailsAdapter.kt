@@ -5,9 +5,10 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.example.pokedix.R
+import com.example.pokedix.databinding.AreaLayoutBinding
+import com.example.pokedix.databinding.DescriptionLayoutBinding
+import com.example.pokedix.databinding.StatsLayoutBinding
 import com.example.pokedix.models.PokemonDetails
-import kotlinx.android.synthetic.main.description_layout.view.*
-import kotlinx.android.synthetic.main.stats_layout.view.*
 
 class PokemonDetailsAdapter : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
     private lateinit var pokemonD: PokemonDetails
@@ -58,19 +59,22 @@ class PokemonDetailsAdapter : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
     override fun getItemViewType(position: Int) = position
 
     inner class DescriptionViewHolder constructor(v: View) : RecyclerView.ViewHolder(v) {
-        fun detailsBind(pokemon: PokemonDetails) = itemView.run {
+        private val descriptionBinding = DescriptionLayoutBinding.bind(v)
+        fun detailsBind(pokemon: PokemonDetails) = with(descriptionBinding) {
             description.text = pokemon.pokeDescription
         }
     }
 
     inner class AreaViewHolder constructor(v: View) : RecyclerView.ViewHolder(v) {
-        fun areaBind(pokemon: PokemonDetails) = itemView.run {
+        private val areaBinding = AreaLayoutBinding.bind(v)
+        fun areaBind(pokemon: PokemonDetails) = with(areaBinding) {
 
         }
     }
 
     inner class StatsViewHolder constructor(v: View) : RecyclerView.ViewHolder(v) {
-        fun statsBind(pokemon: PokemonDetails) = itemView.run {
+        private val statsBinding = StatsLayoutBinding.bind(v)
+        fun statsBind(pokemon: PokemonDetails) = with(statsBinding) {
             hp.text = pokemon.baseStats.hp.toString()
             atk.text = pokemon.baseStats.atk.toString()
             def.text = pokemon.baseStats.def.toString()

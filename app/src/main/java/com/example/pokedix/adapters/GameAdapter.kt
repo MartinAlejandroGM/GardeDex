@@ -5,10 +5,10 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.example.pokedix.R
+import com.example.pokedix.databinding.GameListLayoutBinding
 import com.example.pokedix.extensions.nameFormat
 import com.example.pokedix.models.GameList
 import com.squareup.picasso.Picasso
-import kotlinx.android.synthetic.main.game_list_layout.view.*
 
 class GameAdapter : RecyclerView.Adapter<GameAdapter.GenerationsViewHolder>() {
     private var gamesList = ArrayList<GameList>()
@@ -36,13 +36,14 @@ class GameAdapter : RecyclerView.Adapter<GameAdapter.GenerationsViewHolder>() {
 
 
     inner class GenerationsViewHolder constructor(v: View) : RecyclerView.ViewHolder(v) {
-        fun generationsBind(game: GameList) = itemView.run {
-            game_text.text = game.game.name.nameFormat()
+        private val binding = GameListLayoutBinding.bind(v)
+        fun generationsBind(game: GameList) = with(binding) {
+            gameText.text = game.game.name.nameFormat()
             Picasso.get()
                 .load(game.gameListUrls.gameImage)
                 .error(R.drawable.ic_launcher_background)
-                .into(button_game)
-            setOnClickListener {
+                .into(binding.buttonGame)
+            root.setOnClickListener {
                 onPokeDixClickListener?.invoke(game)
             }
         }

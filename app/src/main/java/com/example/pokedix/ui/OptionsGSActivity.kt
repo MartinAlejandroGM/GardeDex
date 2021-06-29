@@ -6,20 +6,22 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.Toast
 import com.example.pokedix.R
+import com.example.pokedix.databinding.ActivityOptionsGSBinding
 import com.example.pokedix.models.GameList
 import com.squareup.picasso.Picasso
-import kotlinx.android.synthetic.main.activity_options_g_s.*
 
 class OptionsGSActivity : AppCompatActivity() {
+    private lateinit var binding: ActivityOptionsGSBinding
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_options_g_s)
+        binding = ActivityOptionsGSBinding.inflate(layoutInflater)
+        setContentView(binding.root)
 
-        setSupportActionBar(details_activity_toolbar)
+        setSupportActionBar(binding.detailsActivityToolbar)
 
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
 
-        details_activity_toolbar.setNavigationOnClickListener {
+        binding.detailsActivityToolbar.setNavigationOnClickListener {
             onBackPressed()
         }
 
@@ -29,23 +31,23 @@ class OptionsGSActivity : AppCompatActivity() {
             Picasso.get()
                 .load(it.gameListUrls.gameStartScreen)
                 .error(R.drawable.ic_launcher_background)
-                .into(background_screen)
+                .into(binding.backgroundScreen)
 
             Picasso.get()
                 .load(it.gameListUrls.pokemonImage)
                 .error(R.drawable.ic_launcher_background)
-                .into(pokemon)
+                .into(binding.pokemon)
             Picasso.get()
                 .load(it.gameListUrls.itemsImage)
                 .error(R.drawable.ic_launcher_background)
-                .into(items)
+                .into(binding.items)
             Picasso.get()
                 .load(it.gameListUrls.machinesImage)
                 .error(R.drawable.ic_launcher_background)
-                .into(machines)
+                .into(binding.machines)
         }
 
-        pokemon.setOnClickListener {
+        binding.pokemon.setOnClickListener {
             val gameIntent = PokedexListsActivity.getIntent(this, game as GameList)
             startActivity(gameIntent)
             Toast.makeText(this, game.game.name, Toast.LENGTH_SHORT).show()
