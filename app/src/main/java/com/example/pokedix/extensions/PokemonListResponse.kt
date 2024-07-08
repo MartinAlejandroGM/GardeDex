@@ -9,11 +9,11 @@ fun PokedexListResponse.toPokemonList(game: GameResponse): List<PokedexList> {
             PokemonImageUrls(
                 pokemon.pokemonSpecies.name.getPokemonURLSpriteByNameRegion(
                     Regions.valueOf(
-                        region.name.toValidFormatTypesEnum()
+                        region.name.toValidNameFormat()
                     )
                 )
             ),
-            Regions.valueOf(region.name.toValidFormatTypesEnum()),
+            Regions.valueOf(region.name.toValidNameFormat()),
             game.versions[0].name,
             game.generation.name,
             game.name

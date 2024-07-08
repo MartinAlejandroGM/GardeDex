@@ -2,6 +2,7 @@ package com.example.pokedix.extensions
 
 import com.example.pokedix.models.GameImageUrls
 import com.example.pokedix.models.Regions
+import com.example.pokedix.utils.StringConstants
 import java.util.*
 
 fun String.nameFormat(): String {
@@ -10,7 +11,9 @@ fun String.nameFormat(): String {
     val output = StringBuilder()
 
     for (word in words) {
-        output.append(word.toLowerCase(Locale.ROOT).capitalize(Locale.ROOT).plus(" "))
+        output.append(word.lowercase(Locale.ROOT)
+            .replaceFirstChar { if (it.isLowerCase()) it.titlecase(Locale.ROOT) else it.toString() }
+            .plus(" "))
     }
     return output.toString()
 }
@@ -7246,8 +7249,8 @@ fun String.toFormatURL(): String {
 /*
  Transform simple string to a valid format from types enum
 */
-fun String.toValidFormatTypesEnum(): String {
-    return this.toUpperCase(Locale.ROOT).replace('-', '_')
+fun String.toValidNameFormat(): String {
+    return this.uppercase(Locale.ROOT).replace('-', ' ')
 }
 
 /*
@@ -7255,193 +7258,193 @@ This function get the images from te urls by game name
 */
 fun String.getUrlsByGameName(): GameImageUrls {
     return when (this) {
-        "red-blue" -> {
+        StringConstants.RED_BLUE -> {
             GameImageUrls(
-                "https://iili.io/30SqpR.png",
-                "https://iili.io/3MQj5l.png",
-                "https://iili.io/3t30qN.png",
-                "https://iili.io/3jSJb1.png",
-                "https://iili.io/3jSJb1.png"
+                StringConstants.RB_MAIN_IMAGE,
+                StringConstants.RB_START_SCREEN,
+                StringConstants.RB_POKEMON_IMAGE,
+                StringConstants.RB_ITEMS_IMAGE,
+                StringConstants.RB_MACHINES_IMAGE
             )
         }
-        "yellow" -> {
+        StringConstants.YELLOW -> {
             GameImageUrls(
-                "https://iili.io/30Sfkv.png",
-                "https://iili.io/3jSh1j.png",
-                "https://iili.io/3t3csp.png",
-                "https://iili.io/3jSQpI.png",
-                "https://iili.io/3jSQpI.png"
+                StringConstants.Y_MAIN_IMAGE,
+                StringConstants.Y_START_SCREEN,
+                StringConstants.Y_POKEMON_IMAGE,
+                StringConstants.Y_ITEMS_IMAGE,
+                StringConstants.Y_MACHINES_IMAGE
             )
         }
-        "gold-silver" -> {
+        StringConstants.GOLD_SILVER -> {
             GameImageUrls(
-                "https://iili.io/30SCIp.png",
-                "https://iili.io/3jgSfa.png",
-                "https://iili.io/3t3Yzv.png",
-                "https://iili.io/3jrLkQ.png",
-                "https://iili.io/3jrLkQ.png"
+                StringConstants.GS_MAIN_IMAGE,
+                StringConstants.GS_START_SCREEN,
+                StringConstants.GS_POKEMON_IMAGE,
+                StringConstants.GS_ITEMS_IMAGE,
+                StringConstants.GS_MACHINES_IMAGE
             )
         }
-        "crystal" -> {
+        StringConstants.CRYSTAL -> {
             GameImageUrls(
-                "https://iili.io/30SV3u.png",
-                "https://iili.io/3j4fjI.png",
-                "https://iili.io/3jr2z7.png",
-                "https://iili.io/3jrLkQ.png",
-                "https://iili.io/3jrLkQ.png"
+                StringConstants.C_MAIN_IMAGE,
+                StringConstants.C_START_SCREEN,
+                StringConstants.C_POKEMON_IMAGE,
+                StringConstants.C_ITEMS_IMAGE,
+                StringConstants.C_MACHINES_IMAGE
             )
         }
-        "ruby-sapphire" -> {
+        StringConstants.RUBY_SAPPHIRE -> {
             GameImageUrls(
-                "https://iili.io/30SvG1.png",
-                "https://iili.io/3jPBgs.png",
-                "https://iili.io/344p5l.png",
-                "https://iili.io/34g1I9.png",
-                "https://iili.io/34r0aR.png"
+                StringConstants.RS_MAIN_IMAGE,
+                StringConstants.RS_START_SCREEN,
+                StringConstants.RS_POKEMON_IMAGE,
+                StringConstants.RS_ITEMS_IMAGE,
+                StringConstants.RS_MACHINES_IMAGE
             )
         }
-        "emerald" -> {
+        StringConstants.EMERALD -> {
             GameImageUrls(
-                "https://iili.io/30Uo9j.png",
-                "https://iili.io/34iEfn.png",
-                "https://iili.io/344p5l.png",
-                "https://iili.io/34g1I9.png",
-                "https://iili.io/34r0aR.png"
+                StringConstants.E_MAIN_IMAGE,
+                StringConstants.E_START_SCREEN,
+                StringConstants.E_POKEMON_IMAGE,
+                StringConstants.E_ITEMS_IMAGE,
+                StringConstants.E_MACHINES_IMAGE
             )
         }
-        "firered-leafgreen" -> {
+        StringConstants.FIRE_RED_LEAF_GREEN -> {
             GameImageUrls(
-                "https://iili.io/30UVVI.png",
-                "https://iili.io/3sNw8B.png",
-                "https://iili.io/3sNDns.png",
-                "https://iili.io/34g1I9.png",
-                "https://iili.io/34r0aR.png"
+                StringConstants.FR_LG_MAIN_IMAGE,
+                StringConstants.FR_LG_START_SCREEN,
+                StringConstants.FR_LG_POKEMON_IMAGE,
+                StringConstants.FR_LG_ITEMS_IMAGE,
+                StringConstants.FR_LG_MACHINES_IMAGE
             )
         }
-        "diamond-pearl" -> {
+        StringConstants.DIAMOND_PEARL -> {
             GameImageUrls(
-                "https://iili.io/30USx2.png",
-                "https://iili.io/3seCzX.png",
-                "https://iili.io/3seVdQ.jpg",
-                "https://iili.io/34g1I9.png",
-                "https://iili.io/34r0aR.png"
+                StringConstants.DP_MAIN_IMAGE,
+                StringConstants.DP_START_SCREEN,
+                StringConstants.DP_POKEMON_IMAGE,
+                StringConstants.DP_ITEMS_IMAGE,
+                StringConstants.DP_MACHINES_IMAGE
             )
         }
-        "platinum" -> {
+        StringConstants.PLATINUM -> {
             GameImageUrls(
-                "https://iili.io/30UZDQ.png",
-                "https://iili.io/3skuCg.png",
-                "https://iili.io/3seVdQ.jpg",
-                "https://iili.io/34g1I9.png",
-                "https://iili.io/34r0aR.png"
+                StringConstants.P_MAIN_IMAGE,
+                StringConstants.P_START_SCREEN,
+                StringConstants.P_POKEMON_IMAGE,
+                StringConstants.P_ITEMS_IMAGE,
+                StringConstants.P_MACHINES_IMAGE
             )
         }
-        "heartgold-soulsilver" -> {
+        StringConstants.HEART_GOLD_SOUL_SILVER -> {
             GameImageUrls(
-                "https://iili.io/30g90F.png",
-                "https://iili.io/3s85ep.png",
-                "https://iili.io/3s8t4a.png",
-                "https://iili.io/34g1I9.png",
-                "https://iili.io/34r0aR.png"
+                StringConstants.HG_SS_MAIN_IMAGE,
+                StringConstants.HG_SS_START_SCREEN,
+                StringConstants.HG_SS_POKEMON_IMAGE,
+                StringConstants.HG_SS_ITEMS_IMAGE,
+                StringConstants.HG_SS_MACHINES_IMAGE
             )
         }
-        "black-white" -> {
+        StringConstants.BLACK_WHITE -> {
             GameImageUrls(
-                "https://iili.io/30gjLB.png",
-                "https://iili.io/3sUYiX.png",
-                "https://iili.io/3sQuOg.png",
-                "https://iili.io/34g1I9.png",
-                "https://iili.io/34r0aR.png"
+                StringConstants.BW_MAIN_IMAGE,
+                StringConstants.BW_START_SCREEN,
+                StringConstants.BW_POKEMON_IMAGE,
+                StringConstants.BW_ITEMS_IMAGE,
+                StringConstants.BW_MACHINES_IMAGE
             )
         }
-        "colosseum" -> {
+        StringConstants.COLOSSEUM -> {
             GameImageUrls(
-                "https://iili.io/30rfkb.png",
-                "https://iili.io/3t9QZN.png",
-                "https://iili.io/3tJxft.png",
-                "https://iili.io/34g1I9.png",
-                "https://iili.io/34r0aR.png"
+                StringConstants.COLOSSEUM_MAIN_IMAGE,
+                StringConstants.COLOSSEUM_START_SCREEN,
+                StringConstants.COLOSSEUM_POKEMON_IMAGE,
+                StringConstants.COLOSSEUM_ITEMS_IMAGE,
+                StringConstants.COLOSSEUM_MACHINES_IMAGE
             )
         }
-        "xd" -> {
+        StringConstants.XD -> {
             GameImageUrls(
-                "https://iili.io/30rCTx.png",
-                "https://iili.io/3td68u.png",
-                "https://iili.io/3tFqYX.jpg",
-                "https://iili.io/34g1I9.png",
-                "https://iili.io/34r0aR.png"
+                StringConstants.XD_MAIN_IMAGE,
+                StringConstants.XD_START_SCREEN,
+                StringConstants.XD_POKEMON_IMAGE,
+                StringConstants.XD_ITEMS_IMAGE,
+                StringConstants.XD_MACHINES_IMAGE
             )
         }
-        "black-2-white-2" -> {
+        StringConstants.BLACK_TWO_WHITE_TWO -> {
             GameImageUrls(
-                "https://iili.io/30rWan.png",
-                "https://iili.io/3tKvRe.png",
-                "https://iili.io/3tC0Bf.png",
-                "https://iili.io/34g1I9.png",
-                "https://iili.io/34r0aR.png"
+                StringConstants.BT_WT_MAIN_IMAGE,
+                StringConstants.BT_WT_START_SCREEN,
+                StringConstants.BT_WT_POKEMON_IMAGE,
+                StringConstants.BT_WT_ITEMS_IMAGE,
+                StringConstants.BT_WT_MACHINES_IMAGE
             )
         }
-        "x-y" -> {
+        StringConstants.XY -> {
             GameImageUrls(
-                "https://iili.io/306cqN.png",
-                "https://iili.io/3tAfVt.png",
-                "https://iili.io/3tA5W7.png",
-                "https://iili.io/34g1I9.png",
-                "https://iili.io/34r0aR.png"
+                StringConstants.XY_MAIN_IMAGE,
+                StringConstants.XY_START_SCREEN,
+                StringConstants.XY_POKEMON_IMAGE,
+                StringConstants.XY_ITEMS_IMAGE,
+                StringConstants.XY_MACHINES_IMAGE
             )
         }
-        "omega-ruby-alpha-sapphire" -> {
+        StringConstants.OMEGA_RUBY_ALPHA_SAPPHIRE -> {
             GameImageUrls(
-                "https://iili.io/30rNj4.png",
-                "https://iili.io/3tlxBp.png",
-                "https://iili.io/3t0jSt.png",
-                "https://iili.io/34g1I9.png",
-                "https://iili.io/34r0aR.png"
+                StringConstants.OR_AS_MAIN_IMAGE,
+                StringConstants.OR_AS_START_SCREEN,
+                StringConstants.OR_AS_POKEMON_IMAGE,
+                StringConstants.OR_AS_ITEMS_IMAGE,
+                StringConstants.OR_AS_MACHINES_IMAGE
             )
         }
-        "sun-moon" -> {
+        StringConstants.SUN_MOON -> {
             GameImageUrls(
-                "https://iili.io/304HAJ.png",
-                "https://iili.io/3tGuVf.png",
-                "https://iili.io/3tEChb.webp",
-                "https://iili.io/34g1I9.png",
-                "https://iili.io/34r0aR.png"
+                StringConstants.SM_MAIN_IMAGE,
+                StringConstants.SM_START_SCREEN,
+                StringConstants.SM_POKEMON_IMAGE,
+                StringConstants.SM_ITEMS_IMAGE,
+                StringConstants.SM_MACHINES_IMAGE
             )
         }
-        "ultra-sun-ultra-moon" -> {
+        StringConstants.ULTRA_SUN_ULTRA_MOON -> {
             GameImageUrls(
-                "https://iili.io/304KPI.png",
-                "https://iili.io/3tjy0b.png",
-                "https://iili.io/3tNPN2.jpg",
-                "https://iili.io/34g1I9.png",
-                "https://iili.io/34r0aR.png"
+                StringConstants.US_SM_MAIN_IMAGE,
+                StringConstants.US_SM_START_SCREEN,
+                StringConstants.US_SM_POKEMON_IMAGE,
+                StringConstants.US_SM_ITEMS_IMAGE,
+                StringConstants.US_SM_MACHINES_IMAGE
             )
         }
-        "lets-go" -> {
+        StringConstants.LETS_GO_PIKACHU_LETS_GO_EEVEEE -> {
             GameImageUrls(
-                "https://iili.io/304aSe.png",
-                "https://iili.io/3tvVsI.png",
-                "https://iili.io/3t8k3F.webp",
-                "https://iili.io/34g1I9.png",
-                "https://iili.io/34r0aR.png"
+                StringConstants.LGP_LGE_MAIN_IMAGE,
+                StringConstants.LGP_LGE_START_SCREEN,
+                StringConstants.LGP_LGE_POKEMON_IMAGE,
+                StringConstants.LGP_LGE_ITEMS_IMAGE,
+                StringConstants.LGP_LGE_MACHINES_IMAGE
             )
         }
-        "sword-shield" -> {
+        StringConstants.SWORD_SHIELD -> {
             GameImageUrls(
-                "https://iili.io/3040Ab.png",
-                "https://iili.io/3tUrqN.png",
-                "https://iili.io/3tgd7e.png",
-                "https://iili.io/34g1I9.png",
-                "https://iili.io/34r0aR.png"
+                StringConstants.SS_MAIN_IMAGE,
+                StringConstants.SS_START_SCREEN,
+                StringConstants.SS_POKEMON_IMAGE,
+                StringConstants.SS_ITEMS_IMAGE,
+                StringConstants.SS_MACHINES_IMAGE
             )
         }
         else -> {
             GameImageUrls(
-                "https://iili.io/304jl1.jpg",
-                "https://iili.io/304jl1.jpg",
-                "https://iili.io/304jl1.jpg",
-                "https://iili.io/304jl1.jpg",
-                "https://iili.io/304jl1.jpg"
+                StringConstants.DEFAULT_MAIN_IMAGE,
+                StringConstants.DEFAULT_START_SCREEN,
+                StringConstants.DEFAULT_POKEMON_IMAGE,
+                StringConstants.DEFAULT_ITEMS_IMAGE,
+                StringConstants.DEFAULT_MACHINES_IMAGE
             )
         }
     }

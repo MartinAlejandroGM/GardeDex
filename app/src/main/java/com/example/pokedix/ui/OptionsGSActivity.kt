@@ -29,7 +29,7 @@ class OptionsGSActivity : AppCompatActivity() {
 
         game?.let {
             Picasso.get()
-                .load(it.gameListUrls.gameStartScreen)
+                .load(it.gameListUrls.startScreen)
                 .error(R.drawable.ic_launcher_background)
                 .into(binding.backgroundScreen)
 
@@ -50,7 +50,7 @@ class OptionsGSActivity : AppCompatActivity() {
         binding.pokemon.setOnClickListener {
             val gameIntent = PokedexListsActivity.getIntent(this, game as GameList)
             startActivity(gameIntent)
-            Toast.makeText(this, game.game.name, Toast.LENGTH_SHORT).show()
+            Toast.makeText(this, game.name, Toast.LENGTH_SHORT).show()
         }
     }
 

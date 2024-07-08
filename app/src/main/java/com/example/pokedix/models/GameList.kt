@@ -5,15 +5,15 @@ import kotlinx.android.parcel.Parcelize
 
 @Parcelize
 data class GameList (
-    var game: GameTypes,
+    var name: String,
     var gameListUrls: GameImageUrls,
     var url: String
 ): Parcelable
 
 @Parcelize
 data class GameImageUrls(
-    var gameImage: String,
-    var gameStartScreen: String,
+    var image: String,
+    var startScreen: String,
     var pokemonImage: String,
     var itemsImage: String,
     var machinesImage: String
