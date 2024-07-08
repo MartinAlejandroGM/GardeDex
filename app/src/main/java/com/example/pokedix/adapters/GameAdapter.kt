@@ -6,7 +6,6 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.example.pokedix.R
 import com.example.pokedix.databinding.GameListLayoutBinding
-import com.example.pokedix.extensions.nameFormat
 import com.example.pokedix.models.GameList
 import com.squareup.picasso.Picasso
 
@@ -35,12 +34,12 @@ class GameAdapter : RecyclerView.Adapter<GameAdapter.GenerationsViewHolder>() {
     override fun getItemCount() = gamesList.size
 
 
-    inner class GenerationsViewHolder constructor(v: View) : RecyclerView.ViewHolder(v) {
+    inner class GenerationsViewHolder(v: View) : RecyclerView.ViewHolder(v) {
         private val binding = GameListLayoutBinding.bind(v)
         fun generationsBind(game: GameList) = with(binding) {
-            gameText.text = game.game.name.nameFormat()
+            gameText.text = game.name
             Picasso.get()
-                .load(game.gameListUrls.gameImage)
+                .load(game.gameListUrls.image)
                 .error(R.drawable.ic_launcher_background)
                 .into(binding.buttonGame)
             root.setOnClickListener {

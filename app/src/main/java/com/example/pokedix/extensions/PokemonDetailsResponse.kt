@@ -8,11 +8,11 @@ fun PokemonDetailsResponse.toPokemonDetails(
 ): PokemonDetails {
     var type2 = PokemonType.NO
     if (types.size > 1)
-        type2 = PokemonType.valueOf(types.last().type.name.toValidFormatTypesEnum())
+        type2 = PokemonType.valueOf(types.last().type.name.toValidNameFormat())
     return PokemonDetails(
         id,
         name,
-        PokemonType.valueOf(types.first().type.name.toValidFormatTypesEnum()),
+        PokemonType.valueOf(types.first().type.name.toValidNameFormat()),
         type2,
         getFlavor(pokedexSelected.gameVersion, pokemonSpecieResponse.flavorTextEntries),
         BaseStats(
