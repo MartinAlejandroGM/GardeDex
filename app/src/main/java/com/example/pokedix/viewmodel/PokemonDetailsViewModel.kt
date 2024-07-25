@@ -5,24 +5,32 @@ import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
-import com.example.pokedix.models.PokedexList
-import com.example.pokedix.models.PokemonDetails
+import com.example.pokedix.models.PokemonDex
+import com.example.pokedix.models.Pokemon
 import com.example.pokedix.repository.impl.PokedixRepositoryImpl
 import kotlinx.coroutines.Dispatchers
-import com.example.pokedix.extensions.launch
-import com.example.pokedix.extensions.Result
+import com.example.pokedix.utils.coroutineExceptionHandler
+import com.example.pokedix.viewmodel.flowstate.PokedexState
+import com.example.pokedix.viewmodel.flowstate.PokemonState
+import kotlinx.coroutines.flow.MutableStateFlow
+import kotlinx.coroutines.flow.StateFlow
+import kotlinx.coroutines.launch
 
 class PokemonDetailsViewModel(application: Application) : AndroidViewModel(application) {
     private val pokemonRepository = PokedixRepositoryImpl()
-    private val _pokemonLiveData: MutableLiveData<Result<PokemonDetails>> = MutableLiveData()
+    private val _pokemonLiveData: MutableLiveData<Result<Pokemon>> = MutableLiveData()
 
-    val pokemonLiveData: LiveData<Result<PokemonDetails>>
+    val pokemonLiveData: LiveData<Result<Pokemon>>
         get() = _pokemonLiveData
 
-    fun fetchPokemon(pokedexSelected: PokedexList){
-        viewModelScope.launch(_pokemonLiveData, Dispatchers.IO) {
-            val result = pokemonRepository.getPokemon(pokedexSelected)
-            result
+    private val _pokemonStateFlow: MutableStateFlow<PokemonState> = MutableStateFlow(PokemonState.Success(Pokemon()))
+
+    val pokemonStateFlow: StateFlow<PokemonState>
+        get() = _pokemonStateFlow
+
+    fun fetchPokemon(pokedexSelected: PokemonDex){
+        viewModelScope.launch(Dispatchers.IO + coroutineExceptionHandler) {
+            _pokemonStateFlow.emit(PokemonState.Success(pokemonRepository.getPokemon(pokedexSelected)))
         }
     }
 }

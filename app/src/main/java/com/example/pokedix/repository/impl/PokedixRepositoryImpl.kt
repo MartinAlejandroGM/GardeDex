@@ -7,33 +7,33 @@ import com.example.pokedix.repository.PokedixRepository
 import kotlin.collections.ArrayList
 
 class PokedixRepositoryImpl : PokedixRepository {
-    override suspend fun getPokedex(gameUrl: String): List<PokedexList> {
+    override suspend fun getPokedex(gameUrl: String): List<PokemonDex> {
         val pokeWs = PokeWebService()
         val gameResponse: GameResponse = pokeWs.fetchPokedexesByGroupVersion(gameUrl.toFormatURL())
         val pokedexResponseList: PokedexListResponse = pokeWs.fetchPokedex(gameResponse.pokedexes.first().name)
-        val pokedexList: ArrayList<PokedexList> = ArrayList()
+        val pokemonDex: ArrayList<PokemonDex> = ArrayList()
 
         pokedexResponseList.let {
-            pokedexList.addAll(it.toPokemonList(gameResponse))
+            pokemonDex.addAll(it.toPokemonList(gameResponse))
         }
-        return pokedexList
+        return pokemonDex
     }
 
-    override suspend fun getPokemon(pokedexSelected: PokedexList): PokemonDetails {
+    override suspend fun getPokemon(pokedexSelected: PokemonDex): Pokemon {
         val pokeWebService = PokeWebService()
-        val pokemonResponse: PokemonDetailsResponse = pokeWebService.fetchPokemon(pokedexSelected.pokemonName)
+        val pokemonResponse: PokemonResponse = pokeWebService.fetchPokemon(pokedexSelected.pokemonName)
         val pokemonSpecieResponse: PokemonSpecieResponse = pokeWebService.fetchPokemonSpecies(pokedexSelected.pokemonName)
-        val pokemonDetails: PokemonDetails
+        val pokemon: Pokemon
         pokemonResponse.let {
-            pokemonDetails = it.toPokemonDetails(pokedexSelected, pokemonSpecieResponse)
+            pokemon = it.toPokemonDetails(pokedexSelected, pokemonSpecieResponse)
         }
-        return pokemonDetails
+        return pokemon
     }
 
-    override suspend fun getGames(): List<GameList> {
+    override suspend fun getGames(): List<Game> {
         val pokeWs = PokeWebService()
         val generationsResponseList: GameListResponse = pokeWs.fetchGames()
-        val generationsList: ArrayList<GameList> = ArrayList()
+        val generationsList: ArrayList<Game> = ArrayList()
 
         generationsResponseList.let {
             generationsList.addAll(it.toGamesList())

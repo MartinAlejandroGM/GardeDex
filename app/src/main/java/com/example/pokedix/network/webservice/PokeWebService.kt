@@ -23,7 +23,7 @@ class PokeWebService {
         return service.getPokedexesByGroupVersion(url)
     }
 
-    suspend fun fetchPokemon(pokemonName: String): PokemonDetailsResponse {
+    suspend fun fetchPokemon(pokemonName: String): PokemonResponse {
         return service.getPokemon(pokemonName)
     }
 

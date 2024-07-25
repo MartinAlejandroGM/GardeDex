@@ -2,7 +2,7 @@ package com.example.pokedix.models
 
 import com.google.gson.annotations.SerializedName
 
-data class PokemonDetailsResponse(
+data class PokemonResponse(
     val id: Int,
     val name: String,
     val sprites: Sprite,

@@ -1,9 +1,9 @@
 package com.example.pokedix.extensions
 import com.example.pokedix.models.*
 
-fun PokedexListResponse.toPokemonList(game: GameResponse): List<PokedexList> {
+fun PokedexListResponse.toPokemonList(game: GameResponse): List<PokemonDex> {
     return pokemonEntries.map { pokemon ->
-        PokedexList(
+        PokemonDex(
             pokemon.entryNumber,
             pokemon.pokemonSpecies.name,
             PokemonImageUrls(
@@ -14,7 +14,7 @@ fun PokedexListResponse.toPokemonList(game: GameResponse): List<PokedexList> {
                 )
             ),
             Regions.valueOf(region.name.toValidNameFormat()),
-            game.versions[0].name,
+            game.versions.firstOrNull()?.name?:"",
             game.generation.name,
             game.name
         )

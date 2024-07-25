@@ -1,29 +1,26 @@
 package com.example.pokedix.viewmodel
 
-import android.app.Application
-import androidx.lifecycle.AndroidViewModel
-import androidx.lifecycle.LiveData
-import androidx.lifecycle.MutableLiveData
+import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.example.pokedix.models.PokedexList
 import com.example.pokedix.repository.impl.PokedixRepositoryImpl
+import com.example.pokedix.utils.coroutineExceptionHandler
 import kotlinx.coroutines.Dispatchers
-import com.example.pokedix.extensions.launch
-import com.example.pokedix.extensions.Result
+import com.example.pokedix.viewmodel.flowstate.PokedexState
+import kotlinx.coroutines.flow.MutableStateFlow
+import kotlinx.coroutines.flow.StateFlow
+import kotlinx.coroutines.launch
 
-class PokedexViewModel(application: Application) : AndroidViewModel(application) {
+class PokedexViewModel() : ViewModel() {
     private val pokedexRepository = PokedixRepositoryImpl()
-    private val _pokedexLiveData: MutableLiveData<Result<List<PokedexList>>> = MutableLiveData()
 
-    val pokedexLiveData: LiveData<Result<List<PokedexList>>>
-        get() = _pokedexLiveData
+    private val _pokedexStateFlow: MutableStateFlow<PokedexState> = MutableStateFlow(PokedexState.Success(arrayListOf()))
+
+    val pokedexStateFlow: StateFlow<PokedexState>
+        get() = _pokedexStateFlow
 
     fun fetchPokedex(gameUrl: String) {
-        viewModelScope.launch(_pokedexLiveData, Dispatchers.IO) {
-            val result = pokedexRepository.getPokedex(gameUrl)
-            if (result.isNullOrEmpty())
-                throw Exception("Empty PokemonView.")
-            result
+        viewModelScope.launch(Dispatchers.IO + coroutineExceptionHandler) {
+            _pokedexStateFlow.emit(PokedexState.Success(pokedexRepository.getPokedex(gameUrl)))
         }
     }
 }

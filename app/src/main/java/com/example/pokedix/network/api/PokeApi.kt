@@ -18,7 +18,7 @@ interface PokeApi {
     suspend fun getPokedexesByGroupVersion(@Path("url") url: String): GameResponse
 
     @GET("v2/pokemon/{pokeName}/")
-    suspend fun getPokemon(@Path("pokeName") pokeName: String): PokemonDetailsResponse
+    suspend fun getPokemon(@Path("pokeName") pokeName: String): PokemonResponse
 
     @GET("v2/pokemon-species/{pokeName}/")
     suspend fun getPokeSpecies(@Path("pokeName") pokeName: String): PokemonSpecieResponse

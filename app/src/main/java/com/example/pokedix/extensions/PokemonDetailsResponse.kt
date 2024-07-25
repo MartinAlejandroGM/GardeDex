@@ -2,14 +2,14 @@ package com.example.pokedix.extensions
 
 import com.example.pokedix.models.*
 
-fun PokemonDetailsResponse.toPokemonDetails(
-    pokedexSelected: PokedexList,
+fun PokemonResponse.toPokemonDetails(
+    pokedexSelected: PokemonDex,
     pokemonSpecieResponse: PokemonSpecieResponse
-): PokemonDetails {
+): Pokemon {
     var type2 = PokemonType.NO
     if (types.size > 1)
         type2 = PokemonType.valueOf(types.last().type.name.toValidNameFormat())
-    return PokemonDetails(
+    return Pokemon(
         id,
         name,
         PokemonType.valueOf(types.first().type.name.toValidNameFormat()),
@@ -24,7 +24,7 @@ fun PokemonDetailsResponse.toPokemonDetails(
             stats[5].baseStat
         ),
         pokemonSpecieResponse.genera[7].genus,
-        PokemonSprites(pokedexSelected.imagesUrls.pokeFront,"")
+        Sprites(pokedexSelected.imagesUrls.pokeFront,"")
     )
 }
 
