@@ -3,7 +3,6 @@ package com.example.pokedix.extensions
 import android.os.Bundle
 import androidx.navigation.NavType
 import com.example.pokedix.models.Game
-import com.example.pokedix.models.Pokedex
 import com.example.pokedix.models.PokemonDex
 import com.google.gson.Gson
 

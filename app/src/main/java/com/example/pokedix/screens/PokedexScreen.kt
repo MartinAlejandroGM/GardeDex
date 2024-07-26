@@ -19,6 +19,7 @@ import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
 import androidx.wear.compose.material.Scaffold
@@ -44,7 +45,7 @@ fun PokedexListScreen(navController: NavController, pokedexViewModel: PokedexVie
 private fun PokedexBodyContent(pokedexViewModel: PokedexViewModel, navController: NavController){
     Box(modifier = Modifier.fillMaxSize()) {
         Image(
-            painterResource(id = R.drawable.poke_back), contentDescription = "Game List Back",
+            painterResource(id = R.drawable.poke_back), contentDescription = stringResource(id = R.string.pokedex_background),
             contentScale = ContentScale.FillBounds , modifier = Modifier
                 .matchParentSize())
         SetPokemonList(pokedexViewModel, navController)
@@ -56,7 +57,7 @@ private fun SetPokemonList(pokedexViewModel: PokedexViewModel, navController: Na
     val data = pokedexViewModel.pokedexStateFlow.collectAsState(null)
     when(data.value){
         is PokedexState.Success -> {
-            val pokedex = (data.value as? PokedexState.Success)?.pokedex?: arrayListOf()
+            val pokedex = (data.value as? PokedexState.Success)?.pokedex.orEmpty()
             LazyVerticalGrid(
                 columns = GridCells.Adaptive(minSize = 120.dp), modifier = Modifier
                     .fillMaxSize()
@@ -66,9 +67,7 @@ private fun SetPokemonList(pokedexViewModel: PokedexViewModel, navController: Na
                 }
             }
         }
-        else -> {
-
-        }
+        else -> Unit
     }
     pokemonNumber=0
 }

@@ -46,7 +46,7 @@ fun AppNavigation(games: List<Game> = arrayListOf()){
                 defaultValue = ""
             }
         )){
-            PokedexListScreen(navController = navController, pokedexViewModel = pokedexViewModel, gameUrl = it.arguments?.getString("gameUrl")?:"")
+            PokedexListScreen(navController = navController, pokedexViewModel = pokedexViewModel, gameUrl = it.arguments?.getString("gameUrl").orEmpty())
         }
         composable(route = AppScreens.PokemonScreen.route.plus("/{pokemon}"),
             arguments = listOf(navArgument(name = "pokemon") {

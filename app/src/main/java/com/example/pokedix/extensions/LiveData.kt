@@ -2,11 +2,6 @@ package com.example.pokedix.extensions
 
 import androidx.lifecycle.LifecycleOwner
 import androidx.lifecycle.LiveData
-import androidx.lifecycle.lifecycleScope
-import kotlinx.coroutines.flow.FlowCollector
-import kotlinx.coroutines.flow.StateFlow
-import kotlinx.coroutines.flow.launchIn
-import kotlinx.coroutines.launch
 
 inline fun <T> LiveData<Result<T>>.observe(
     owner: LifecycleOwner,

@@ -16,4 +16,9 @@
     <string name="sa">SA</string>
     <string name="sd">SD</string>
     <string name="sp">Sp</string>
+    <string name="pokedex">Pokedex</string>
+    <string name="items">Items</string>
+    <string name="machines">Machines</string>
+    <string name="games_background">Games Background</string>
+    <string name="pokedex_background">Pokedex Background</string>
 </resources>

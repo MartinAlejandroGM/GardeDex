@@ -6,11 +6,9 @@ import androidx.activity.compose.setContent
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import androidx.compose.runtime.collectAsState
-import androidx.lifecycle.lifecycleScope
 import com.example.pokedix.navigation.AppNavigation
 import com.example.pokedix.viewmodel.GamesListViewModel
 import com.example.pokedix.viewmodel.flowstate.GameState
-import kotlinx.coroutines.launch
 
 class MainActivity : AppCompatActivity() {
     private val gamesViewModel: GamesListViewModel by viewModels<GamesListViewModel>()

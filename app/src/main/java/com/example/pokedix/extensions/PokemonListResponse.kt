@@ -14,7 +14,7 @@ fun PokedexListResponse.toPokemonList(game: GameResponse): List<PokemonDex> {
                 )
             ),
             Regions.valueOf(region.name.toValidNameFormat()),
-            game.versions.firstOrNull()?.name?:"",
+            game.versions.firstOrNull()?.name.orEmpty(),
             game.generation.name,
             game.name
         )
