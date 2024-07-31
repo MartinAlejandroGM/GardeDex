@@ -1,4 +1,4 @@
-package com.andro_sk.pokedix.screens
+package com.andro_sk.pokedix.ui.screens
 
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.window.Dialog
