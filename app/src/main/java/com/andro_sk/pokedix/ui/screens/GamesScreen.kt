@@ -1,4 +1,4 @@
-package com.andro_sk.pokedix.screens
+package com.andro_sk.pokedix.ui.screens
 
 import android.net.Uri
 import androidx.compose.foundation.Image

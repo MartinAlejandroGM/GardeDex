@@ -1,4 +1,4 @@
-package com.andro_sk.pokedix.screens
+package com.andro_sk.pokedix.ui.screens
 
 import android.net.Uri
 import androidx.compose.foundation.Image
@@ -69,7 +69,7 @@ private fun SetPokemonList(pokedexViewModel: PokedexViewModel, navController: Na
         }
         else -> Unit
     }
-    pokemonNumber=0
+    pokemonNumber =0
 }
 
 @Composable

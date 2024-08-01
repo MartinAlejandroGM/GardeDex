@@ -11,10 +11,10 @@ import com.andro_sk.pokedix.extensions.GameTypeParam
 import com.andro_sk.pokedix.extensions.PokemonTypeParam
 import com.andro_sk.pokedix.models.Game
 import com.andro_sk.pokedix.models.PokemonDex
-import com.andro_sk.pokedix.screens.GameOptionsScreen
-import com.andro_sk.pokedix.screens.GamesScreen
-import com.andro_sk.pokedix.screens.PokedexListScreen
-import com.andro_sk.pokedix.screens.PokemonScreen
+import com.andro_sk.pokedix.ui.screens.GameOptionsScreen
+import com.andro_sk.pokedix.ui.screens.GamesScreen
+import com.andro_sk.pokedix.ui.screens.PokedexListScreen
+import com.andro_sk.pokedix.ui.screens.PokemonScreen
 import com.andro_sk.pokedix.viewmodel.PokedexViewModel
 
 @Composable
