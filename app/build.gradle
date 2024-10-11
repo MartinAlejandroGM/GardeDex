@@ -6,11 +6,11 @@ plugins{
 }
 
 android {
-    namespace 'com.andro_sk.pokedix'
+    namespace 'com.andro_sk.gardedex'
     compileSdk 34
 
     defaultConfig {
-        applicationId "com.andro_sk.pokedix"
+        applicationId "com.andro_sk.gardedex"
         minSdkVersion 25
         targetSdkVersion 33
         versionCode 1
