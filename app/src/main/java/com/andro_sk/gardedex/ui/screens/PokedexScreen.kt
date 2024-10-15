@@ -26,15 +26,14 @@ import androidx.navigation.NavController
 import androidx.wear.compose.material.Scaffold
 import coil.compose.AsyncImage
 import com.andro_sk.gardedex.R
-import com.andro_sk.gardedex.extensions.numberPokemonByRegion
+import com.andro_sk.gardedex.extensions.getPokemonSpritesById
+import com.andro_sk.gardedex.models.PokeSprites
 import com.andro_sk.gardedex.models.PokemonDex
-import com.andro_sk.gardedex.models.Regions
 import com.andro_sk.gardedex.navigation.AppScreens
 import com.andro_sk.gardedex.viewmodel.PokedexViewModel
 import com.andro_sk.gardedex.viewmodel.flowstate.PokedexState
 import com.google.gson.Gson
 
-private var pokemonNumber = 0
 @Composable
 fun PokedexListScreen(navController: NavController, pokedexViewModel: PokedexViewModel, gameUrl: String, ){
     pokedexViewModel.fetchPokedex(gameUrl)
@@ -60,23 +59,22 @@ private fun SetPokemonList(pokedexViewModel: PokedexViewModel, navController: Na
     when(data.value){
         is PokedexState.Success -> {
             val pokedex = (data.value as? PokedexState.Success)?.pokedex.orEmpty()
-            getFirstNumberPokemon(pokedex.first().region)
             LazyVerticalGrid(
                 columns = GridCells.Adaptive(minSize = 120.dp), modifier = Modifier
                     .fillMaxSize()
             ) {
                 items(pokedex) { pokemon ->
-                    SetPokedex(pokemon, navController)
+                    SetPokedex(pokemon, navController, pokemon.getPokemonSpritesById())
                 }
-                pokemonNumber++
             }
+
         }
         else -> Log.e("Error", data.value.toString())
     }
 }
 
 @Composable
-private fun SetPokedex(pokemonDex: PokemonDex, navController: NavController){
+private fun SetPokedex(pokemonDex: PokemonDex, navController: NavController, sprites: PokeSprites){
     Box (
         modifier = Modifier
             .fillMaxSize()
@@ -88,7 +86,7 @@ private fun SetPokedex(pokemonDex: PokemonDex, navController: NavController){
             .clip(CircleShape)
             .background(Color.DarkGray)) {
         AsyncImage(
-            model = "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/$pokemonNumber.png",
+            model = sprites.frontDefault,
             contentDescription = pokemonDex.pokemonName, modifier = Modifier
                 .matchParentSize()
                 .padding(start = 50.dp))
@@ -100,9 +98,4 @@ private fun SetPokedex(pokemonDex: PokemonDex, navController: NavController){
                 .padding(2.dp))
     }
 
-}
-
-private fun getFirstNumberPokemon(region: Regions): Int{
-    pokemonNumber = region.numberPokemonByRegion()
-    return pokemonNumber
 }

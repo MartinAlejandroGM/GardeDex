@@ -1,7 +1,6 @@
 package com.andro_sk.gardedex.ui.screens
 
 import android.net.Uri
-import android.util.Log
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
@@ -29,7 +28,6 @@ import com.google.gson.Gson
 
 @Composable
 fun GamesScreen(games: List<Game>, navController: NavController){
-    Log.e("Info Error", "Entro a la pantalla de Games")
     Scaffold {
         BodyContent(games, navController)
     }

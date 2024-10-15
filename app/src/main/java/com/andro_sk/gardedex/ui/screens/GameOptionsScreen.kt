@@ -1,7 +1,6 @@
 package com.andro_sk.gardedex.ui.screens
 
 import android.net.Uri
-import android.util.Log
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.PaddingValues
