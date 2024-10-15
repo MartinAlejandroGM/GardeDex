@@ -178,5 +178,13 @@ object StringConstants{
     const val DEFAULT_MACHINES_IMAGE = "https://iili.io/304jl1.jpg"
 
 
-    //Game Images
+    //Pokemon Images Urls
+    const val POKEMON_SPRITE_DEFAULT_BACK = "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/back"
+    const val POKEMON_SPRITE_FEMALE_BACK = "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/back/female/"
+    const val POKEMON_SPRITE_SHINY_BACK = "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/back/shiny/"
+    const val POKEMON_SPRITE_SHINY_FEMALE_BACK = "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/back/shiny/female/"
+    const val POKEMON_SPRITE_FRONT_DEFAULT = "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/"
+    const val POKEMON_SPRITE_FEMALE_FRONT = "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/female/"
+    const val POKEMON_SPRITE_SHINY_FRONT = "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/shiny/"
+    const val POKEMON_SPRITE_SHINY_FEMALE_FRONT = "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/shiny/female/"
 }

@@ -59,6 +59,7 @@ dependencies {
     implementation(libs.converter.gson)
     implementation(libs.androidx.legacy)
     implementation(libs.coil)
+    implementation(libs.material3)
 
     implementation platform(libs.kotlin.bom)
     implementation platform(libs.compose.bom)
